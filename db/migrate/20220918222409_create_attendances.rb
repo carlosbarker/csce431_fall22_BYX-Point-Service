@@ -5,10 +5,9 @@ class CreateAttendances < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_reference :Attendance, :Member, foreign_key: true
-    add_reference  :Member, :Attendance, foreign_key: true
-    add_reference :Attendance, :Event, foreign_key: true
-    add_reference  :Event, :Attendance, foreign_key: true
+    #add_reference :attendances, :members, foreign_key: true
+    #add_reference  :members, :attendances, foreign_key: true
+    #add_reference :attendances, :events, foreign_key: true
+    #add_reference  :events, :attendances, foreign_key: true
     end
-  end
 end
