@@ -15,7 +15,7 @@ Event.destroy_all
 
 
 @test_memb = Member.create({
-    user: 'test', 
+    username: 'test', 
     password: 'pass', 
     f_name: 'John',
     l_name: 'Doe'})
