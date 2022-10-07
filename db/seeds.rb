@@ -8,24 +8,41 @@
 
 require "time"
 
+
+ServicePoint.destroy_all
 Attendance.destroy_all
-Member.destroy_all
+
 Event.destroy_all
+Meeting.destroy_all
 
-
+Member.destroy_all
 
 @test_memb = Member.create({
     username: 'test', 
     password: 'pass', 
     f_name: 'John',
-    l_name: 'Doe'})
+    l_name: 'Doe',
+    card_id: '%777777',
+    email: 'john.doe@gmail.com',
+    phone: '6977664062',
+    admin: false,
+    graduated: true})
 
 @test_event = Event.create({
     datetime: Time.parse("Sep 19 2020 10:00"), 
     title: 'party', 
     description: 'Crazy but not too crazy'})
 
-@test_att = Attendance.create!({
-    arrival_time: Time.parse("Sep 19 2020 10:10"),
+@test_servicepoint = ServicePoint.create({
+    datetime: Time.parse("Sep 20 2020 12:10"),
     members_id: @test_memb.id,
     events_id: @test_event.id})
+
+@test_meeting = Meeting.create({
+    datetime: Time.parse("Sep 20 2020 12:00") })
+
+@test_att = Attendance.create({
+    tardy: false,
+    members_id: @test_memb.id,
+    meetings_id: @test_meeting.id})
+
