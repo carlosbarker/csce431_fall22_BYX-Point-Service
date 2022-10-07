@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require "time"
+require "csv"
 
 
 ServicePoint.destroy_all
@@ -45,4 +46,27 @@ Member.destroy_all
     tardy: false,
     members_id: @test_memb.id,
     meetings_id: @test_meeting.id})
+
+# create an array of rows for the existing csv data files
+fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))
+spring2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'spring2022.csv'))
+fall2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2022.csv'))
+
+
+
+# parse the attendence data
+def parse_attendence_data(arr, year)
+    months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    headers = arr[0]
+    headers.each do |header|
+      # if the header ends with a month name
+      if months.include? header[-3..-1].upcase
+        #puts 'adding: ' + header
+        date = Time.parse(year + '-' + header[-3..-1] + '-' + header[0..-4])
+        Meeting.create({datetime: date})
+      end
+    end
+end
+
+parse_attendence_data(fall2021_data, '2021')
 
