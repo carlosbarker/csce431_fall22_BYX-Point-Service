@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
+          gem install rspec-rails
           bundler install
       - name: Create database
         run: |
