@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_19_000000) do
+ActiveRecord::Schema.define(version: 2022_10_04_133850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attendances", force: :cascade do |t|
-    t.datetime "arrival_time"
+    t.boolean "tardy"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "members_id"
-    t.bigint "events_id"
-    t.index ["events_id"], name: "index_attendances_on_events_id"
+    t.bigint "meetings_id"
+    t.index ["meetings_id"], name: "index_attendances_on_meetings_id"
     t.index ["members_id"], name: "index_attendances_on_members_id"
   end
 
@@ -33,15 +33,38 @@ ActiveRecord::Schema.define(version: 2022_09_19_000000) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "meetings", force: :cascade do |t|
+    t.datetime "datetime"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string "username"
     t.string "password"
     t.string "f_name"
     t.string "l_name"
+    t.string "card_id"
+    t.string "email"
+    t.string "phone"
+    t.boolean "admin"
+    t.boolean "graduated"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "attendances", "events", column: "events_id"
+  create_table "service_points", force: :cascade do |t|
+    t.datetime "datetime"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "members_id"
+    t.bigint "events_id"
+    t.index ["events_id"], name: "index_service_points_on_events_id"
+    t.index ["members_id"], name: "index_service_points_on_members_id"
+  end
+
+  add_foreign_key "attendances", "meetings", column: "meetings_id"
   add_foreign_key "attendances", "members", column: "members_id"
+  add_foreign_key "service_points", "events", column: "events_id"
+  add_foreign_key "service_points", "members", column: "members_id"
 end
