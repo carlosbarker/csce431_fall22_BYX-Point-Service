@@ -42,7 +42,7 @@ cd your_github_here
 
 docker run --rm -it --volume "$(pwd):/rails_app" -e DATABASE_USER=test_app -e DATABASE_PASSWORD=test_password -p 3000:3000 dmartinez05/ruby_rails_postgresql:latest
 
-For Windows:
+For Windows (PowerShell):
 
 docker run --rm -it --volume "${PWD}:/csce431" -e DATABASE_USER=test_app -e DATABASE_PASSWORD=test_password -p 3000:3000 dmartinez05/ruby_rails_postgresql:latest
 
@@ -54,7 +54,7 @@ bundle install && rails webpacker:install && rails db:create && rails db:migrate
 
 Run the app
 
-**rails server --binding=0.0.0.0**
+rails server --binding=0.0.0.0
 
 The application can be seen using a browser and navigating to http://localhost:3000/
 

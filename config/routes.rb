@@ -17,6 +17,22 @@ Rails.application.routes.draw do
   # get "charts" => "pages#charts"
   # get "forgot_password" => "pages#forgot_password"
   # get "login" => "pages#login"
+
+  devise_for :member, controllers: { omniauth_callbacks: 'admin/omniauth_callbacks' }
   
-  root 'pages#landing'
+  devise_scope :admin do
+    get 'admin/login', to: 'admin/sessions#new', as: :new_admin_session
+    get 'admin/logout', to: 'admin/sessions#destroy', as: :destroy_admin_session
+  end
+
+  devise_scope :member do
+    get 'member/login', to: 'member/sessions#new', as: :new_member_session
+    get 'member/logout', to: 'member/sessions#destroy', as: :destroy_member_session
+  end
+
+  get 'admin', action: :index, controller: :admin
+
+  resources :admin
+
+  root 'admin#index'
 end
