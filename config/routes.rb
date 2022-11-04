@@ -20,6 +20,10 @@ Rails.application.routes.draw do
 
   devise_for :member, controllers: { omniauth_callbacks: 'admin/omniauth_callbacks' }
   
+  # Routes for Google authentication
+  get 'auth/:provider/callback', to: 'sessions#googleAuth'
+  get 'auth/failure', to: redirect('/')
+
   devise_scope :admin do
     get 'admin/login', to: 'admin/sessions#new', as: :new_admin_session
     get 'admin/logout', to: 'admin/sessions#destroy', as: :destroy_admin_session
@@ -34,5 +38,6 @@ Rails.application.routes.draw do
 
   resources :admin
 
-  root 'admin#index'
+  # root 'admin#index'
+  root 'member_dash#index'
 end

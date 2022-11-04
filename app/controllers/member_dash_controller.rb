@@ -1,0 +1,2 @@
+class MemberDashController < ApplicationController
+end
