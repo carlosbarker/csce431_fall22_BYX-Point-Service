@@ -48,6 +48,10 @@ docker run --rm -it --volume "${PWD}:/csce431" -e DATABASE_USER=test_app -e DATA
 
 cd rails_app
 
+For Windows:
+
+cd csce431
+
 Install the app
 
 bundle install && rails webpacker:install && rails db:create && rails db:migrate
