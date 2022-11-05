@@ -40,15 +40,16 @@ ActiveRecord::Schema.define(version: 2022_10_04_133850) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
-    t.string "f_name"
-    t.string "l_name"
+    t.string "full_name"
+    t.string "uid"
     t.string "card_id"
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "phone"
     t.boolean "admin"
     t.boolean "graduated"
+    t.string "avatar_url"
+    t.string "provider"
+    t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

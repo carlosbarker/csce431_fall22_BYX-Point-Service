@@ -3,13 +3,15 @@ Rails.application.routes.draw do
 
   devise_for :members, controllers:
   {
-    omniauth_callbacks: 'members/omniauth_callbacks'
+    omniauth_callbacks: 'members/omniauth_callbacks',
+    sessions: 'members/sessions',
+    registrations: 'members/registrations'
   }
 
-  devise_scope :member do
-    get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session
-    get 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
-  end
+  # devise_scope :member do
+  #   get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session
+  #   get 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
+  # end
 
   get 'members', action: :index, controller: :members
 

@@ -83,9 +83,8 @@ If you do not pass these variables when running locally, the app will run offlin
 
 # Deployment
 
-To deploy to Heroku:
+To deploy to Heroku:Create pull request in Github from new branch to merge to master
 
-* Create pull request in Github from new branch to merge to master
 * Review app in Heroku automatically created for branch with pull request
 * Check review app for functionality
 * Approve pull request and merge to master

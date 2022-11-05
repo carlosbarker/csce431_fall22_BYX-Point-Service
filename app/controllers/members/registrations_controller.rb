@@ -60,13 +60,13 @@ class Members::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  # def update_resource(resource, params)
-  #   if resource.provider == 'google_oauth2'
-  #     params.delete('current password')
-  #     resource.password = params['password']
-  #     resource.update_without_password(params)
-  #   else
-  #     resource.update_with_password(params)
-  #   end
-  # end
+  def update_resource(resource, params)
+    if resource.provider == 'google_oauth2'
+      params.delete('current password')
+      resource.password = params['password']
+      resource.update_without_password(params)
+    else
+      resource.update_with_password(params)
+    end
+  end
 end
