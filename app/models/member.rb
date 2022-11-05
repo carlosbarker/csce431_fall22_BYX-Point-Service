@@ -1,5 +1,10 @@
 class Member < ApplicationRecord
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         # for Google OAuth
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :member_id, presence: true
   validates :name, presence: true
@@ -13,6 +18,12 @@ class Member < ApplicationRecord
   has_many :attendance, dependent: :destroy
 
   def self.from_omniauth(auth)
-    Person.where(email: auth.info.email).first
+    # Member.where(email: auth.info.email).first
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |member|
+      member.email = auth.info.email
+      member.password = Devise.friendly_token[0, 20]
+      member.full_name = auth.info.name
+      member.avatar_url = auth.info.image
+    end
   end
 end

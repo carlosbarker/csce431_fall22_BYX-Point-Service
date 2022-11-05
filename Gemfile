@@ -69,7 +69,9 @@ gem 'rubocop'
 
 # Authentication
 gem 'devise'
+gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 
 # Google Calendar
 gem 'google-api-client', require: 'google/apis/calendar_v3'
