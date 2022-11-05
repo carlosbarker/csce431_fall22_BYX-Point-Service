@@ -12,11 +12,9 @@ Rails.application.routes.draw do
   end
 
   get 'members', action: :index, controller: :members
-  get 'admin', action: :index, controller: :admin
 
   resources :landing  # can maybe remove?
   # resources :admin_dash  # may not need to add this as a resource since it's hidden
 
   root 'landing#index'
-  # will redirect to login page since members is restricted
 end
