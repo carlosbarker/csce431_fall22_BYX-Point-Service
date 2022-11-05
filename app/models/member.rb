@@ -20,6 +20,7 @@ class Member < ApplicationRecord
     #Member.where(email: auth.info.email).first
     where(provider: auth.provider, uid: auth.uid).first_or_create do |member|
       member.email = auth.info.email
+      member.password = Devise.friendly_token[0, 20]
       member.full_name = auth.info.name
       member.avatar_url = auth.info.image
     end
