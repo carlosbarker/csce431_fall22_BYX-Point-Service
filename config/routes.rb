@@ -8,22 +8,13 @@ Rails.application.routes.draw do
     registrations: 'members/registrations'
   }
 
-  # devise_for :member, controllers: { omniauth_callbacks: 'member/omniauth_callbacks' }
-  
-  # Routes for Google authentication
-  # get 'auth/:provider/callback', to: 'sessions#googleAuth'
-  # get 'auth/failure', to: redirect('/')
+  get 'members', action: :index, controller: :members
 
-  #devise_scope :member do
-  #  get 'member/login', to: 'member/sessions#new', as: :new_member_session
-  #  get 'member/logout', to: 'member/sessions#destroy', as: :destroy_member_session
-  #end
-
-  # get 'admin', action: :index, controller: :admin
-  get 'member', action: :index, controller: :member
-
-  resources :member
+  resources :members
+  resources :member_dash
+  resources :admin_dash
   resources :login_landing
 
-  root 'members#index'
+  root 'member_dash#index'
+  # will redirect to login page since member_dash is restricted
 end
