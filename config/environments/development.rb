@@ -74,3 +74,17 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 end
+
+# Use mock account in dev environment if Google OAuth environment variables are not specified
+if !(ENV.has_key?("GOOGLE_OAUTH_CLIENT_ID") || ENV.has_key?("GOOGLE_OAUTH_CLIENT_SECRET"))
+  # Test mode will auto redirect to auth/google/callback, no call is made to actual Google authentication server
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.add_mock(:google_oauth2, { info: { email: 'cbarker@tamu.edu'} })
+
+  Rails.application.env_config['devise.mapping'] = Devise.mappings[:member]
+  Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+elsif
+  Rails.application.env_config['GOOGLE_OAUTH_CLIENT_ID'] = ENV['GOOGLE_OAUTH_CLIENT_ID']
+  Rails.application.env_config['GOOGLE_OAUTH_CLIENT_SECRET'] = ENV['GOOGLE_OAUTH_CLIENT_SECRET']
+end

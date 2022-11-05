@@ -3,18 +3,20 @@ Rails.application.routes.draw do
 
   devise_for :members, controllers:
   {
-    omniauth_callbacks: 'members/omniauth_callbacks',
-    sessions: 'members/sessions',
-    registrations: 'members/registrations'
+    omniauth_callbacks: 'members/omniauth_callbacks'
   }
 
+  devise_scope :member do
+    get 'members/sign_in', to: 'members/sessions#new', as: :new_member_session
+    get 'members/sign_out', to: 'members/sessions#destroy', as: :destroy_member_session
+  end
+
   get 'members', action: :index, controller: :members
+  get 'admin', action: :index, controller: :admin
 
-  resources :members
-  resources :member_dash
-  resources :admin_dash
-  resources :login_landing
+  resources :landing  # can maybe remove?
+  # resources :admin_dash  # may not need to add this as a resource since it's hidden
 
-  root 'member_dash#index'
-  # will redirect to login page since member_dash is restricted
+  root 'landing#index'
+  # will redirect to login page since members is restricted
 end

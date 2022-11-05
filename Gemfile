@@ -65,7 +65,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Security
 gem 'brakeman'
-gem 'rubocop'
 
 # Authentication
 gem 'devise'
