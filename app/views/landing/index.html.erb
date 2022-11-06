@@ -1,18 +1,20 @@
 <html>
   <head>
-    <title>Landing | BYXPointService</title>
+    <title>Member Dashboard | BYXPointService</title>
   </head>
   <body>
     <div style="text-align:center;">
       <h1>BYX Member Portal</h1>
-      <p>(visible to EVERYONE without logging in)</p>
+      <p>(visible only to members logged in)</p>
       <% if current_member %>
-      <h2><%= current_member.email %></h2>
+        <h3><%= current_member.full_name%></h3>
+        <p><%= current_member.email %></p>
         <!-- <%= image_tag(current_member.avatar_url) %> -->
         <!-- <%= link_to "Edit Account", edit_member_registration_path %> -->
         <%= button_to "Logout", destroy_member_session_path, data: {turbo: "false"}, method: :delete %>
       <% else %>
-        <%= link_to "Login", new_member_session_path %>
+        <!-- <%= link_to "Login", new_member_session_path %> -->
+        <%= controller.redirect_to new_member_session_path %>
       <% end %>
     </div>
   </body>

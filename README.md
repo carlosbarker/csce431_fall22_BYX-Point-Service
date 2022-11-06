@@ -103,3 +103,4 @@ Users looking for assistance should reach out to development team.
 
 * [Google OAuth for Ruby On Rails. Implementing sign in with Gmail account… | by Amos Choo | Medium](https://medium.com/@amoschoo/google-oauth-for-ruby-on-rails-129ce7196f35)
 * [How to add Google Sign In (SSO) with Devise to a Ruby on Rails 7 App | by Quan Nguyen | Dev Genius](https://blog.devgenius.io/how-to-add-google-sign-in-sso-with-devise-to-a-ruby-on-rails-7-app-6d8c5ef7641b)
+* [Google OAuth + Rails 5 using Devise and OmniAuth | by Adam Langsner | Medium](https://medium.com/@adamlangsner/google-oauth-rails-5-using-devise-and-omniauth-1b7fa5f72c8e)
