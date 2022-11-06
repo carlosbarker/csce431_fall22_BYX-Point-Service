@@ -23,6 +23,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :last_sign_in_ip
       
       ## Google stuff
+      t.string :uid
       t.string :avatar_url
       t.string :provider
 

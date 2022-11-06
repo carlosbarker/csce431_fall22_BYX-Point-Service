@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  devise_for :members, controllers:
+  devise_for :users, controllers:
   {
-    omniauth_callbacks: 'members/omniauth_callbacks',
-    sessions: 'members/sessions',
-    registrations: 'members/registrations'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
 
   # get 'members', action: :index, controller: :members
