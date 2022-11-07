@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2022_10_04_133850) do
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "email"
     t.string "full_name"
     t.string "card_id"
     t.string "phone"
