@@ -51,12 +51,12 @@ def parse_data(arrs, years)
             
         else # if member has not been added/created
             next if arrs[i][j][1].nil? # if there is no name, then skip making a member
-            tokens = arrs[i][j][1].split(' ')
-            fname = tokens[0]
-            lname = tokens[1]
+            #tokens = arrs[i][j][1].split(' ')
+            #fname = tokens[0]
+            #lname = tokens[1]
+            
             member = Member.create({
-                f_name: fname,
-                l_name: lname,
+                full_name: arrs[i][j][1],
                 card_id: arrs[i][j][0]
             })
 
@@ -84,6 +84,7 @@ def parse_data(arrs, years)
                     
                 member = members_hash[[arr[k][0], arr[k][1]]]
                 
+                
                 Attendance.create({
                     tardy: false,
                     members_id: member.id,
@@ -102,35 +103,37 @@ Meeting.destroy_all
 
 Member.destroy_all
 
-@test_memb = Member.create({
-    username: 'test', 
-    password: 'pass', 
-    f_name: 'John',
-    l_name: 'Doe',
-    card_id: '%777777',
-    email: 'john.doe@gmail.com',
-    phone: '6977664062',
-    admin: false,
-    graduated: true})
+# adding devs as members
 
-@test_event = Event.create({
-    datetime: Time.parse("Sep 19 2020 10:00"), 
-    title: 'party', 
-    description: 'Crazy but not too crazy'})
+Member.create({
+    full_name: "Trevor Hatch",
+    email: "trevorhatch@tamu.edu",
+    card_id: "lol I am a dev"
+    })
 
-@test_servicepoint = ServicePoint.create({
-    datetime: Time.parse("Sep 20 2020 12:10"),
-    members_id: @test_memb.id,
-    events_id: @test_event.id})
+Member.create({
+    full_name: "Carlos Barker",
+    email: "cbarker@tamu.edu",
+    card_id: "lol I am a dev 2"
+    })
 
-@test_meeting = Meeting.create({
-    datetime: Time.parse("Sep 20 2020 12:00") })
+Member.create({
+    full_name: "Ram Pangaluri",
+    email: "raamus2000@tamu.edu",
+    card_id: "lol I am a dev 3"
+    })
 
-@test_att = Attendance.create({
-    tardy: false,
-    members_id: @test_memb.id,
-    meetings_id: @test_meeting.id})
+Member.create({
+    full_name: "Trevor Underwood",
+    email: "trevor012@tamu.edu",
+    card_id: "lol I am a dev 4"
+    })
 
+Member.create({
+    full_name: "Vyas Chitti",
+    email: "chittiv1113@tamu.edu",
+    card_id: "lol I am a dev 5"
+    })
 
 # create an array of rows for the existing csv data files
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))

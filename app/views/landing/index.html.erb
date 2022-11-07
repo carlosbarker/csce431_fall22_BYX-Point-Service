@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Member Dashboard | BYXPointService</title>
+  </head>
+  <body>
+    <div style="text-align:center;">
+      <h1>BYX Member Portal</h1>
+      <p>(visible only to members logged in)</p>
+      <% if current_user %>
+        <h3><%= current_user.full_name%></h3>
+        <p><%= current_user.email %></p>
+        <!-- <%= image_tag(current_user.avatar_url) %> -->
+        <!-- <%= link_to "Edit Account", edit_user_registration_path %> -->
+        <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+      <% else %>
+        <!-- <%= link_to "Login", new_user_session_path %> -->
+        <%= controller.redirect_to new_user_session_path %>
+      <% end %>
+    </div>
+  </body>
+</html>
