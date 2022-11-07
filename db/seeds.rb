@@ -103,6 +103,38 @@ Meeting.destroy_all
 
 Member.destroy_all
 
+# adding devs as members
+
+Member.create({
+    full_name: "Trevor Hatch",
+    email: "trevorhatch@tamu.edu",
+    card_id: "lol I am a dev"
+    })
+
+Member.create({
+    full_name: "Carlos Barker",
+    email: "cbarker@tamu.edu",
+    card_id: "lol I am a dev 2"
+    })
+
+Member.create({
+    full_name: "Ram Pangaluri",
+    email: "raamus2000@tamu.edu",
+    card_id: "lol I am a dev 3"
+    })
+
+Member.create({
+    full_name: "Trevor Underwood",
+    email: "trevor012@tamu.edu",
+    card_id: "lol I am a dev 4"
+    })
+
+Member.create({
+    full_name: "Vyas Chitti",
+    email: "chittiv1113@tamu.edu",
+    card_id: "lol I am a dev 5"
+    })
+
 # create an array of rows for the existing csv data files
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))
 spring2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'spring2022.csv'))
@@ -111,6 +143,3 @@ fall2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2022.csv'))
 arrs = [fall2021_data, spring2022_data, fall2022_data]
 years = ['2021', '2022', '2022']
 parse_data(arrs, years)
-
-@test_meeting = Meeting.create({
-    datetime: Time.parse("Sep 20 2020 12:00") })
