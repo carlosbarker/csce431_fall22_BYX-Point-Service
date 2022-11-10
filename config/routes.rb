@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   # resources define available paths. if listed here, then domain.com/resource_name WILL work, otherwise it will throw a routing error
   resources :admin
+  resources :members
+  resources :users
+  resources :events
   # resources :admin_dash  # may not need to add this as a resource since it's hidden
 
   root 'landing#index'
