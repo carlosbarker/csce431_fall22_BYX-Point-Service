@@ -43,9 +43,9 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span><td><%= link_to 'Dashboard', root_path, class: "nav-link collapsed" %></td></span></a>
             </li>
 
 
@@ -100,7 +100,7 @@
             <li class="nav-item">
                 <a class="nav-link" >
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Alumni</span></a>
+                    <span><td><%= link_to 'Alumni', alumnus_path, class: "nav-link collapsed" %></td></span></a>
             </li>
 
             <!-- Divider -->
