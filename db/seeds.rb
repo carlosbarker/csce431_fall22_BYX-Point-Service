@@ -94,7 +94,7 @@ def parse_data(arrs, years)
     end
 end
 
-
+User.destroy_all
 ServicePoint.destroy_all
 Attendance.destroy_all
 
