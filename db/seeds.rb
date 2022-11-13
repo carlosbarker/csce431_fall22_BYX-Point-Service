@@ -72,7 +72,6 @@ def parse_data(arrs, years, emails)
                         card_id: arrs[i][j][0]
                     })
                 else
-                    puts emails[email_i][2]
                     member = Member.create({
                         full_name: arrs[i][j][1],
                         card_id: arrs[i][j][0],
@@ -124,8 +123,7 @@ Meeting.destroy_all
 Member.destroy_all
 
 # adding devs as members
-
-Member.create({
+@trevorh = Member.create({
     full_name: "Trevor Hatch",
     email: "trevorhatch@tamu.edu",
     card_id: "lol I am a dev",
@@ -146,7 +144,7 @@ Member.create({
     admin: true
     })
 
-Member.create({
+@trevoru = Member.create({
     full_name: "Trevor Underwood",
     email: "trevor012@tamu.edu",
     card_id: "lol I am a dev 4",
@@ -160,7 +158,32 @@ Member.create({
     admin: true
     })
 
-ServicePoint.create()
+@event1 = Event.create({
+    datetime: "11-10-2022",
+    title: "saving puppies",
+    description: "meet us at the corner of Texas Ave and University to save the puppies"
+    })
+
+@event2 = Event.create({
+    datetime: "11-2-2022",
+    title: "World Peace",
+    description: "Jump up and down and spin in a circle"
+    })
+
+ServicePoint.create({
+    members_id: @trevoru.id,
+    events_id: @event1.id
+})
+
+ServicePoint.create({
+    members_id: @trevoru.id,
+    events_id: @event2.id
+})
+
+ServicePoint.create({
+    members_id: @trevorh.id,
+    events_id: @event2.id
+})
 
 # create an array of rows for the existing csv data files
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))
