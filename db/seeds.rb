@@ -65,17 +65,13 @@ def parse_data(arrs, years, emails)
                 #fname = tokens[0]
                 #lname = tokens[1]
                 email_i = email_names.find_index(arrs[i][j][1])
-                puts ''
-                puts '-----------------------------'
-                puts arrs[i][j][1]
-                puts email_i
+
                 if email_i.nil? || emails[email_i][2] == ''
                     member = Member.create({
                         full_name: arrs[i][j][1],
                         card_id: arrs[i][j][0]
                     })
                 else
-                    puts emails[email_i][2]
                     member = Member.create({
                         full_name: arrs[i][j][1],
                         card_id: arrs[i][j][0],
@@ -117,6 +113,7 @@ def parse_data(arrs, years, emails)
 end
 
 User.destroy_all
+
 ServicePoint.destroy_all
 Attendance.destroy_all
 
@@ -126,36 +123,67 @@ Meeting.destroy_all
 Member.destroy_all
 
 # adding devs as members
-
-Member.create({
+@trevorh = Member.create({
     full_name: "Trevor Hatch",
     email: "trevorhatch@tamu.edu",
-    card_id: "lol I am a dev"
+    card_id: "lol I am a dev",
+    admin: true
     })
 
 Member.create({
     full_name: "Carlos Barker",
     email: "cbarker@tamu.edu",
-    card_id: "lol I am a dev 2"
+    card_id: "lol I am a dev 2",
+    admin: true
     })
 
 Member.create({
     full_name: "Ram Pangaluri",
     email: "raamus2000@tamu.edu",
-    card_id: "lol I am a dev 3"
+    card_id: "lol I am a dev 3",
+    admin: true
     })
 
-Member.create({
+@trevoru = Member.create({
     full_name: "Trevor Underwood",
     email: "trevor012@tamu.edu",
-    card_id: "lol I am a dev 4"
+    card_id: "lol I am a dev 4",
+    admin: true
     })
 
 Member.create({
     full_name: "Vyas Chitti",
     email: "chittiv1113@tamu.edu",
-    card_id: "lol I am a dev 5"
+    card_id: "lol I am a dev 5",
+    admin: true
     })
+
+@event1 = Event.create({
+    datetime: "11-10-2022",
+    title: "saving puppies",
+    description: "meet us at the corner of Texas Ave and University to save the puppies"
+    })
+
+@event2 = Event.create({
+    datetime: "11-2-2022",
+    title: "World Peace",
+    description: "Jump up and down and spin in a circle"
+    })
+
+ServicePoint.create({
+    members_id: @trevoru.id,
+    events_id: @event1.id
+})
+
+ServicePoint.create({
+    members_id: @trevoru.id,
+    events_id: @event2.id
+})
+
+ServicePoint.create({
+    members_id: @trevorh.id,
+    events_id: @event2.id
+})
 
 # create an array of rows for the existing csv data files
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))
