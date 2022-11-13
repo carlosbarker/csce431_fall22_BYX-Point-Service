@@ -86,4 +86,26 @@
         </ul>
         <!-- End of Sidebar -->
 <h1>Members</h1>
-
+<table>
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Card ID</th>
+            <th>Phone</th>
+            <th>Alumni</th>
+            <th colspan="6"></th>
+        </tr>
+    </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.full_name %></td>
+        <td><%= member.email %></td>
+        <td><%= member.card_id %></td>
+        <td><%= member.phone %></td>
+        <td><%= member.graduated %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
