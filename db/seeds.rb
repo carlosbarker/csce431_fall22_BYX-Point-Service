@@ -33,10 +33,20 @@ def parse_meetings(arr, year)
   end
 
 # parse all data, adds unique members, attendance, and meetings to the database
-def parse_data(arrs, years)
+def parse_data(arrs, years, emails)
     meeting_indexes = [] # col index for meeting in a csv
     all_meetings = [] # holds meeting model data
-    members_hash = Hash.new # members hash, will be filled with (key:[card_id, name]) and (value: Member object) pairs.
+    members_hash = Hash.new # members hash, will be filled with (key: full_name) and (value: Member object) pairs.
+
+    email_names = []
+    #iterate through emails csv to store full_names
+    emails.each do |row|
+        if row[0].nil? || row[1].nil?
+            email_names.append('EMPTY VALUE')
+            next
+        end
+        email_names.append(row[0] + ' ' + row[1])
+    end
 
     # iterate through the csvs, create meetings and members
     for i in 0..arrs.size()-1
@@ -45,25 +55,38 @@ def parse_data(arrs, years)
         meeting_indexes.append(indexes)
         all_meetings.append(meetings)
         for j in 1..arrs[i].size()-1
+            next if arrs[i][j][0].nil? || arrs[i][j][1].nil? # if there is no name or no cardid, then skip making a member
 
-        if members_hash.include?([arrs[i][j][0], arrs[i][j][1]]) # if member has already been added/created
-            next
-            
-        else # if member has not been added/created
-            next if arrs[i][j][1].nil? # if there is no name, then skip making a member
-            #tokens = arrs[i][j][1].split(' ')
-            #fname = tokens[0]
-            #lname = tokens[1]
-            
-            member = Member.create({
-                full_name: arrs[i][j][1],
-                card_id: arrs[i][j][0]
-            })
+            if members_hash.include?(arrs[i][j][1]) # if member has already been added/created
+                next
+                
+            else # if member has not been added/created
+                #tokens = arrs[i][j][1].split(' ')
+                #fname = tokens[0]
+                #lname = tokens[1]
+                email_i = email_names.find_index(arrs[i][j][1])
+                puts ''
+                puts '-----------------------------'
+                puts arrs[i][j][1]
+                puts email_i
+                if email_i.nil? || emails[email_i][2] == ''
+                    member = Member.create({
+                        full_name: arrs[i][j][1],
+                        card_id: arrs[i][j][0]
+                    })
+                else
+                    puts emails[email_i][2]
+                    member = Member.create({
+                        full_name: arrs[i][j][1],
+                        card_id: arrs[i][j][0],
+                        email: emails[email_i][2]
+                    })
+                end
 
-            members_hash[[arrs[i][j][0], arrs[i][j][1]]] = member
-        end
-        # add member to unique member set
-        
+                members_hash[arrs[i][j][1]] = member
+            end
+            # add member to unique member set
+            
         end
     end
 
@@ -75,16 +98,15 @@ def parse_data(arrs, years)
             col = meeting_indexes[i][j]
             for k in 1..arr.size()-1 # for each row in the csv file
                 next if arr[k][1].nil? # skip if there is no name
-                next if !members_hash.include?([arr[k][0], arr[k][1]]) # skip if hashmap doesnt have key: [card_id, name]
+                next if !members_hash.include?(arr[k][1]) # skip if hashmap doesnt have key: full_name
 
                 attendance_val = arr[k][col]
                 
                 next if attendance_val.nil? # skip if there is not a value listed for attendance
                 next if !(attendance_val == '0') # skip if the attendance value was not marked as present
                     
-                member = members_hash[[arr[k][0], arr[k][1]]]
-                
-                
+                member = members_hash[arr[k][1]]
+                                
                 Attendance.create({
                     tardy: false,
                     members_id: member.id,
@@ -139,7 +161,8 @@ Member.create({
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))
 spring2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'spring2022.csv'))
 fall2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2022.csv'))
+emails_data = CSV.read(Rails.root.join('lib', 'seeds', 'emails.csv'))
 
-arrs = [fall2021_data, spring2022_data, fall2022_data]
-years = ['2021', '2022', '2022']
-parse_data(arrs, years)
+arrs = [fall2022_data, spring2022_data, fall2021_data]
+years = ['2022', '2022', '2021']
+parse_data(arrs, years, emails_data)
