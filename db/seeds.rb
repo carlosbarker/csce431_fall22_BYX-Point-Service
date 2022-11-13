@@ -65,10 +65,7 @@ def parse_data(arrs, years, emails)
                 #fname = tokens[0]
                 #lname = tokens[1]
                 email_i = email_names.find_index(arrs[i][j][1])
-                puts ''
-                puts '-----------------------------'
-                puts arrs[i][j][1]
-                puts email_i
+
                 if email_i.nil? || emails[email_i][2] == ''
                     member = Member.create({
                         full_name: arrs[i][j][1],
@@ -116,6 +113,7 @@ def parse_data(arrs, years, emails)
     end
 end
 
+User.destroy_all
 
 ServicePoint.destroy_all
 Attendance.destroy_all
@@ -130,32 +128,39 @@ Member.destroy_all
 Member.create({
     full_name: "Trevor Hatch",
     email: "trevorhatch@tamu.edu",
-    card_id: "lol I am a dev"
+    card_id: "lol I am a dev",
+    admin: true
     })
 
 Member.create({
     full_name: "Carlos Barker",
     email: "cbarker@tamu.edu",
-    card_id: "lol I am a dev 2"
+    card_id: "lol I am a dev 2",
+    admin: true
     })
 
 Member.create({
     full_name: "Ram Pangaluri",
     email: "raamus2000@tamu.edu",
-    card_id: "lol I am a dev 3"
+    card_id: "lol I am a dev 3",
+    admin: true
     })
 
 Member.create({
     full_name: "Trevor Underwood",
     email: "trevor012@tamu.edu",
-    card_id: "lol I am a dev 4"
+    card_id: "lol I am a dev 4",
+    admin: true
     })
 
 Member.create({
     full_name: "Vyas Chitti",
     email: "chittiv1113@tamu.edu",
-    card_id: "lol I am a dev 5"
+    card_id: "lol I am a dev 5",
+    admin: true
     })
+
+ServicePoint.create()
 
 # create an array of rows for the existing csv data files
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))
