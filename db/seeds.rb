@@ -139,4 +139,4 @@ fall2022_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2022.csv'))
 
 arrs = [fall2021_data, spring2022_data, fall2022_data]
 years = ['2021', '2022', '2022']
-parse_data(arrs, years)
+#parse_data(arrs, years)
