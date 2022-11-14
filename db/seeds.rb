@@ -69,13 +69,15 @@ def parse_data(arrs, years, emails)
                 if email_i.nil? || emails[email_i][2] == ''
                     member = Member.create({
                         full_name: arrs[i][j][1],
-                        card_id: arrs[i][j][0]
+                        card_id: arrs[i][j][0],
+                        graduated: false
                     })
                 else
                     member = Member.create({
                         full_name: arrs[i][j][1],
                         card_id: arrs[i][j][0],
-                        email: emails[email_i][2]
+                        email: emails[email_i][2],
+                        graduated: false
                     })
                 end
 
@@ -127,6 +129,7 @@ trevorh = Member.create({
     full_name: "Trevor Hatch",
     email: "trevorhatch@tamu.edu",
     card_id: "lol I am a dev",
+    graduated: true,
     admin: true
     })
 
@@ -134,6 +137,7 @@ Member.create({
     full_name: "Carlos Barker",
     email: "cbarker@tamu.edu",
     card_id: "lol I am a dev 2",
+    graduated: true,
     admin: true
     })
 
@@ -141,6 +145,7 @@ Member.create({
     full_name: "Ram Pangaluri",
     email: "raamus2000@tamu.edu",
     card_id: "lol I am a dev 3",
+    graduated: false,
     admin: true
     })
 
@@ -148,6 +153,7 @@ trevoru = Member.create({
     full_name: "Trevor Underwood",
     email: "trevor012@tamu.edu",
     card_id: "lol I am a dev 4",
+    graduated: true,
     admin: true
     })
 
@@ -155,6 +161,7 @@ Member.create({
     full_name: "Vyas Chitti",
     email: "chittiv1113@tamu.edu",
     card_id: "lol I am a dev 5",
+    graduated: false,
     admin: true
     })
 
@@ -206,6 +213,7 @@ meeting1 = Meeting.create({
 Attendance.create({
     tardy: false,
     members_id: trevoru.id,
+
     meetings_id: meeting1.id
 })
 

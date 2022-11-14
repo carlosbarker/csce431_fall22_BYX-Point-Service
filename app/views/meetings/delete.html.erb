@@ -1,0 +1,17 @@
+<%= link_to 'Back', meetings_path %>
+
+<div>
+  <h2>Delete Meeting</h2>
+
+  <%= form_for(@meeting, :method => 'delete') do |f| %>
+
+    <p>Are you sure you want to permanently delete this meeting?</p>
+
+    <p class="reference-name"><%= f.object.datetime %></p>
+
+    <div class="form-buttons">
+      <%= f.submit("Delete Meeting") %>
+    </div>
+
+  <% end %>
+</div>
