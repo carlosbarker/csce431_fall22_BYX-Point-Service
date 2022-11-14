@@ -1,7 +1,13 @@
 class EventsController < ApplicationController
     before_action :set_event, only: %i[ show edit update destroy ]
     def index
+        #@events = Event.where(
+            #datetime: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
+        #)
         @events = Event.all
+        #@meetings = Meeting.where(
+            #datetime: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
+        #)
         @meetings = Meeting.all
     end
 

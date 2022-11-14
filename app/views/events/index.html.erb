@@ -181,6 +181,38 @@
         </table>
         <%= link_to 'New Meeting', new_meeting_path %>
             </div>
+            
+           <div class="container mt-5 text-center">
+           <p> Upcoming Events <p>
+                <%= month_calendar(attribute: :datetime, events: @events) do |date, events| %>
+                    <div class="day">
+                        <%= date.day %>
+                    </div>
+                    <% events.each do |event| %>
+                        <div class="card-header">
+                            <div class="card-title">
+                                <%= link_to event.title, event %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+           </div>
+
+           <div class="container mt-5 text-center">
+           <p> Upcoming Meetings <p>
+                <%= month_calendar(attribute: :datetime, events: @meetings) do |date, meetings| %>
+                    <div class="day">
+                        <%= date.day %>
+                    </div>
+                    <% meetings.each do |meeting| %>
+                        <div class="card-header">
+                            <div class="card-title">
+                                <%= link_to meeting.datetime, meeting %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+           </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
