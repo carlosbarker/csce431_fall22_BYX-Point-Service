@@ -102,9 +102,7 @@ def parse_data(arrs, years, emails)
                 next if !(attendance_val == '0') # skip if the attendance value was not marked as present
                     
                 member = members_hash[arr[k][1]]
-
-                puts member.inspect
-                puts meeting.inspect     
+  
                 Attendance.create({
                     tardy: false,
                     members_id: member.id,
@@ -171,11 +169,6 @@ event2 = Event.create({
     title: "World Peace",
     description: "Jump up and down and spin in a circle"
     })
-
-puts trevoru.id
-puts trevorh.id
-puts event1.id
-puts event2.id
 
 meeting1 = Meeting.create(
     datetime: "11-8-2022"
