@@ -4,7 +4,11 @@ This README contains information about the BYX-Point-Service web app regarding w
 
 # Introduction
 
-Application Description
+This application is for use by the BYX(Beta Upsilon Chi) organization.<br>
+The application uses account authentication with a tamu email to distinguish between officers and members of the organization.<br>
+BYX officers can track and modify attendance and service points for their members, as well as create/edit/delete member accounts, <br>
+furthermore officers can also create/edit/delete organizetion events that are output to a calendar.<br>
+BYX members can see their attendance and service points, as well as see upcoming events on a calendar when they are logged in.
 
 # Requirements
 
@@ -22,6 +26,12 @@ This code has been run and tested on:
 * Git
 
 # Installation
+
+Install Docker Desktop
+
+Run the following
+
+`docker pull dmartinez05/ruby_rails_postgresql:latest`
 
 Download this code repository by using git:
 
@@ -66,6 +76,8 @@ If you are having issues logging in, it most likely is because your database is 
 
 `rails db:seed`
 
+The app is designed to not allow a person to log in unless their email can be found in the Members table.
+
 # Google OAuth2 Environment Variables
 
 Google OAuth2 uses two environment variables to work:
@@ -101,7 +113,7 @@ CD - Heroku pipeline for automatic deployment for review apps and production app
 
 # Support
 
-Users looking for assistance should reach out to development team.
+There will be a link to a support page on the BYX app that BYX members can use if they encounter issues with the app. <br>On the support page users can contact the development team to report any issues, look at a demo of the application and read the documentation concerning the project. 
 
 # References/Credits
 

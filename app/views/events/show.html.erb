@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.datetime %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %> |
+<td><%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

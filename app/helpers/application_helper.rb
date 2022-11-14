@@ -1,5 +1,9 @@
 module ApplicationHelper
   def is_admin(email)
-    return true
+    Member.where(admin: true, email: email).find_each do |member|
+      return true
+    end
+
+    return false
   end
 end

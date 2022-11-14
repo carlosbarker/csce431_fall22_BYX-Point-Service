@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Alumni | BYXPointService</title>
+    <title>Members | BYXPointService</title>
 
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -16,7 +16,7 @@
 <body id="page-top">
 
     <!-- Login Redirect (if not logged in, controller should take care of this but just in case) -->
-    <% if !current_user%>
+    <% if !current_user %>
         <%= controller.redirect_to new_user_session_path %>
     <% end %>
 
@@ -129,11 +129,42 @@
                         <h1 class="h1 mb-0 text-gray-800">Alumni</h1>
                     </div>
 
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Show</th>
+                                <th>Edit</th>
+                                <th>Destroy</th>
+                                <th colspan="6"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% @members.each do |member| %>
+                            <% if member.graduated %>
+                            <tr>
+                            <td><%= member.full_name %></td>
+                            <td><%= member.email %></td>
+                            <td><%= link_to 'Show', member %></td>
+                            <td><%= link_to 'Edit', edit_member_path(member) %></td>
+                            <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            </tr>
+                            <% end %>
+                        <% end %>
+                        </tbody>
+                    </table>
+
+                    <%= link_to 'New Member', new_member_path %>
+
                 </div>
                 <!-- End of Page Content -->
 
             </div>
             <!-- End of Main Content -->
+
+        </ul>
+        <!-- End of Sidebar -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
