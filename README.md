@@ -27,6 +27,12 @@ This code has been run and tested on:
 
 # Installation
 
+Install Docker Desktop
+
+Run the following
+
+`docker pull dmartinez05/ruby_rails_postgresql:latest`
+
 Download this code repository by using git:
 
 git clone [https://github.com/carlosbarker/csce431_fall22_BYX-Point-Service.git](https://github.com/carlosbarker/csce431_fall22_BYX-Point-Service.git)
@@ -69,6 +75,8 @@ The application can be seen using a browser and navigating to http://localhost:3
 If you are having issues logging in, it most likely is because your database is empty. In this case, run:
 
 `rails db:seed`
+
+The app is designed to not allow a person to log in unless their email can be found in the Members table.
 
 # Google OAuth2 Environment Variables
 
