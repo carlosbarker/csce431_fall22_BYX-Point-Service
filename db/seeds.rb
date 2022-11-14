@@ -102,7 +102,7 @@ def parse_data(arrs, years, emails)
                 next if !(attendance_val == '0') # skip if the attendance value was not marked as present
                     
                 member = members_hash[arr[k][1]]
-                                
+  
                 Attendance.create({
                     tardy: false,
                     members_id: member.id,
@@ -123,7 +123,7 @@ Meeting.destroy_all
 Member.destroy_all
 
 # adding devs as members
-@trevorh = Member.create({
+trevorh = Member.create({
     full_name: "Trevor Hatch",
     email: "trevorhatch@tamu.edu",
     card_id: "lol I am a dev",
@@ -144,7 +144,7 @@ Member.create({
     admin: true
     })
 
-@trevoru = Member.create({
+trevoru = Member.create({
     full_name: "Trevor Underwood",
     email: "trevor012@tamu.edu",
     card_id: "lol I am a dev 4",
@@ -158,31 +158,47 @@ Member.create({
     admin: true
     })
 
-@event1 = Event.create({
+event1 = Event.create({
     datetime: "11-10-2022",
     title: "saving puppies",
     description: "meet us at the corner of Texas Ave and University to save the puppies"
     })
 
-@event2 = Event.create({
+event2 = Event.create({
     datetime: "11-2-2022",
     title: "World Peace",
     description: "Jump up and down and spin in a circle"
     })
 
+meeting1 = Meeting.create(
+    datetime: "11-8-2022"
+)
+
+
+Attendance.create(
+    tardy: false,
+    members_id: trevoru.id,
+    meetings_id: meeting1.id
+)
+
 ServicePoint.create({
-    members_id: @trevoru.id,
-    events_id: @event1.id
+    members_id: trevoru.id,
+    created_at: "11-05-2022",
+    updated_at: "11-05-2022",
+    events_id: event1.id
 })
 
 ServicePoint.create({
-    members_id: @trevoru.id,
-    events_id: @event2.id
+    members_id: trevoru.id,
+    events_id: event2.id
 })
 
 ServicePoint.create({
-    members_id: @trevorh.id,
-    events_id: @event2.id
+    members_id: trevorh.id,
+    events_id: event2.id
+})
+
+ServicePoint.create({
 })
 @meeting1 = Meeting.create({
 

@@ -1,3 +1,2 @@
 class Attendance < ApplicationRecord
-
 end
