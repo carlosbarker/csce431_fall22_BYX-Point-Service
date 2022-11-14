@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :events
   resources :alumnus
   resources :support
+  resources :meetings
 
   root 'landing#index'
 end
