@@ -104,7 +104,8 @@ def parse_data(arrs, years)
                 next if attendance_val.nil? # skip if there is not a value listed for attendance
                 next if !(attendance_val == '0') # skip if the attendance value was not marked as present
                     
-                           puts meeting.inspect     
+                member = members_hash[arr[k][1]]
+                
                 Attendance.create({
                     tardy: false,
                     members_id: member.id,
@@ -174,8 +175,8 @@ event1 = Event.create({
 event2 = Event.create({
     datetime: "11-2-2022",
     title: "World Peace",
-    description: "Jump up and spin in circles"
-
+    description: "Jump up and down and spin in a circle"
+    })
 
 meeting1 = Meeting.create(
     datetime: "11-8-2022"
@@ -202,7 +203,12 @@ ServicePoint.create({
 
 ServicePoint.create({
     members_id: trevorh.id,
-    events_id: event2.imeeting1 = Meeting.create({
+    events_id: event2.id
+})
+
+ServicePoint.create({
+})
+meeting1 = Meeting.create({
 
 })
 Attendance.create({
@@ -210,11 +216,6 @@ Attendance.create({
     members_id: trevoru.id,
 
     meetings_id: meeting1.id
-})
-d
-})
-
-ServicePoint.create({
 })
 
 # create an array of rows for the existing csv data files
