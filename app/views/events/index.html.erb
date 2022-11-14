@@ -1,88 +1,71 @@
-<body id="page-top">
+<html>
+<head>
+    <title>Calendar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="evo-calendar.min.css">
+    <link rel="stylesheet" href="evo-calendar.midnight-blue.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Licorice&family=Roboto:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hero">
+       
+        <div id="calendar"></div>
+        <div id ="eventmanager">
+            <form action="/action_page.php">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <input type="button" style="background-color: #bda5ff" style="font-family: 'Roboto', sans-serif" id="myButton" name="answer" value="Add Event" />
+                <input type="submit" style="background-color: #bda5ff" style="font-family: 'Roboto', sans-serif" value="Delete Event" >
+            </form>
+        </div>
+        
+        
+        <!-- <a href="#head"><img src="upbutton.png" id="fixedbutton"></a> -->
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js">
+    </script>
+    
+    <!-- <script src="evo-calendar.min.js">
+    </script> -->
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <%= javascript_pack_tag 'evo-calendar.js' %>
 
-            <!-- Sidebar - Brand -->
-            <div><td><%= link_to 'Beta Upsilon Chi', root_path, class: "sidebar-brand d-flex align-items-center justify-content-center" %></td></div>
+    <script>
+        $(document).ready(function() {
+            $("#myButton").click(function() {
+                $("#myButton").after('<input type="text" id="textInput" value="">');
+             });
+        });
+    </script>
+    <script> 
+    // Initialize evo-calendar in your script file or an inline <script> tag
+    $(document).ready(function() {
+        $('#calendar').evoCalendar({
+            theme: "Default",
+            //This is where the money is at. JSON this, and you're set.
+            calendarEvents: [
+            {
+                id: 'Add event', // Event's ID (required)
+                name: "Thanksgiving", // Event name (required)
+                description: "Thanksgiving is a national holiday celebrated on various dates in the United States, Canada, Grenada, Saint Lucia, and Liberia. It began as a day of giving thanks for the blessing of the harvest and of the preceding year",
+                date: "November/24/2022", // Event date (required)
+                type: "holiday", // Event type (required)
+                everyYear: true // Same event every year (optional)oi
+            },
+            {
+                name: "Vacation Leave",
+                badge: "02/13 - 02/15", // Event badge (optional)
+                date: ["February/13/2023", "February/15/2023"], // Date range
+                description: "Vacation leave for 3 days.", // Event description (optional)
+                type: "event",
+                color: "#63d867" // Event custom color (optional)
+            }
+            ]
+        })
+    })
+    </script>
+</body>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span><td><%= link_to 'Dashboard', root_path, class: "nav-link collapsed" %></td></span></a>
-            </li>
-
-
-
-
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a> -->
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a> -->
-                <a class="nav-link collapsed">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span><td><%= link_to 'Members', members_path, class: "nav-link collapsed" %></td></span>
-                </a>
-                <hr class="sidebar-divider">
-
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" ><!--href="charts.html"-->
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span><td><%= link_to 'Calendar', events_path, class: "nav-link collapsed" %></td></span>
-            </li>
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" >
-                    <i class="fas fa-fw fa-table"></i>
-                    <span><td><%= link_to 'Alumni', alumnus_path, class: "nav-link collapsed" %></td></span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-
-
-
-
-        </ul>
-        <!-- End of Sidebar -->
-<h1>Calendar</h1>
-
-<p>Testing the events here.<p>
+</html>
