@@ -33,8 +33,7 @@ def parse_meetings(arr, year)
   end
 
 # parse all data, adds unique members, attendance, and meetings to the database
-def parse_data(arrs, years)
-    meedef parse_data(arrs, years, emails)
+def parse_data(arrs, years, emails)
     meeting_indexes = [] # col index for meeting in a csv
     all_meetings = [] # holds meeting model data
     members_hash = Hash.new # members hash, will be filled with (key: full_name) and (value: Member object) pairs.
