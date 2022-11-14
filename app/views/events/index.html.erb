@@ -1,71 +1,155 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Calendar</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="evo-calendar.min.css">
-    <link rel="stylesheet" href="evo-calendar.midnight-blue.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Licorice&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Calendar | BYXPointService</title>
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 </head>
-<body>
-    <div class="hero">
-       
-        <div id="calendar"></div>
-        <div id ="eventmanager">
-            <form action="/action_page.php">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <input type="button" style="background-color: #bda5ff" style="font-family: 'Roboto', sans-serif" id="myButton" name="answer" value="Add Event" />
-                <input type="submit" style="background-color: #bda5ff" style="font-family: 'Roboto', sans-serif" value="Delete Event" >
-            </form>
+
+<body id="page-top">
+
+    <!-- Login Redirect (if not logged in, controller should take care of this but just in case) -->
+    <% if !current_user%>
+        <%= controller.redirect_to new_user_session_path %>
+    <% end %>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+    <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <div><td><%= link_to 'Beta Upsilon Chi', root_path, class: "sidebar-brand d-flex align-items-center justify-content-center" %></td></div>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link">
+                    <span><td><%= link_to 'Dashboard', root_path, class: "nav-link collapsed" %></td></span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Members -->
+            <li class="nav-item">
+                <a class="nav-link">
+                    <span><td><%= link_to 'Members', members_path, class: "nav-link collapsed" %></td></span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Calendar -->
+            <li class="nav-item active">
+                <a class="nav-link" >
+                    <span><td><%= link_to 'Calendar', events_path, class: "nav-link collapsed" %></td></span>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Alumni -->
+            <li class="nav-item">
+                <a class="nav-link" >
+                    <span><td><%= link_to 'Alumni', alumnus_path, class: "nav-link collapsed" %></td></span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Nav Item - Admin Portal -->
+            <% if current_user %>
+                <% if is_admin(current_user.email) %>  <!-- only show admin link if current user is admin -->
+                    <li class="nav-item">
+                        <a class="nav-link" >
+                            <span><td><%= link_to 'Admin', admin_index_path, class: "nav-link collapsed" %></td></span></a>
+                    </li>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+                <% end %>
+            <% end %>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Full Name -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle">
+                                <% if current_user %>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><h3><%= current_user.full_name%></h3></span>
+                                <% end %>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Logout -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle">
+                                <% if current_user %>
+                                    <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+                                <% end %>
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h1 mb-0 text-gray-800">Calendar</h1>
+                    </div>
+
+                </div>
+                <!-- End of Page Content -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Brothers Under Christ | <%= link_to "Support", support_index_path %></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
-        
-        
-        <!-- <a href="#head"><img src="upbutton.png" id="fixedbutton"></a> -->
+        <!-- End of Content Wrapper -->
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js">
-    </script>
-    
-    <!-- <script src="evo-calendar.min.js">
-    </script> -->
+    <!-- End of Page Wrapper -->
 
-    <%= javascript_pack_tag 'evo-calendar.js' %>
-
-    <script>
-        $(document).ready(function() {
-            $("#myButton").click(function() {
-                $("#myButton").after('<input type="text" id="textInput" value="">');
-             });
-        });
-    </script>
-    <script> 
-    // Initialize evo-calendar in your script file or an inline <script> tag
-    $(document).ready(function() {
-        $('#calendar').evoCalendar({
-            theme: "Default",
-            //This is where the money is at. JSON this, and you're set.
-            calendarEvents: [
-            {
-                id: 'Add event', // Event's ID (required)
-                name: "Thanksgiving", // Event name (required)
-                description: "Thanksgiving is a national holiday celebrated on various dates in the United States, Canada, Grenada, Saint Lucia, and Liberia. It began as a day of giving thanks for the blessing of the harvest and of the preceding year",
-                date: "November/24/2022", // Event date (required)
-                type: "holiday", // Event type (required)
-                everyYear: true // Same event every year (optional)oi
-            },
-            {
-                name: "Vacation Leave",
-                badge: "02/13 - 02/15", // Event badge (optional)
-                date: ["February/13/2023", "February/15/2023"], // Date range
-                description: "Vacation leave for 3 days.", // Event description (optional)
-                type: "event",
-                color: "#63d867" // Event custom color (optional)
-            }
-            ]
-        })
-    })
-    </script>
 </body>
-
 </html>
