@@ -23,37 +23,50 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-    <!-- Sidebar -->
+        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <div><td><%= link_to 'Beta Upsilon Chi', root_path, class: "sidebar-brand d-flex align-items-center justify-content-center" %></td></div>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Nav Item - Admin Indicator -->
+            <% if current_user %>
+                <% if is_admin(current_user.email) %>  <!-- only show admin link if current user is admin -->
+                    <div class="sidebar-brand d-flex align-items-center justify-content-center"><td><b>ADMINISTRATOR</b></td></div>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+                <% end %>
+            <% end %>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
                 <a class="nav-link">
-                    <span><td><%= link_to 'Dashboard', root_path, class: "nav-link collapsed" %></td></span></a>
+                    <span><td><%= link_to '🏠 Dashboard', root_path, class: "nav-link collapsed" %></td></span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Members -->
-            <li class="nav-item">
-                <a class="nav-link">
-                    <span><td><%= link_to 'Members', members_path, class: "nav-link collapsed" %></td></span>
-                </a>
-            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Calendar -->
             <li class="nav-item active">
                 <a class="nav-link" >
-                    <span><td><%= link_to 'Calendar', events_path, class: "nav-link collapsed" %></td></span>
+                    <span><td><%= link_to '🗓️ Calendar', events_path, class: "nav-link collapsed" %></td></span>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Members -->
+            <li class="nav-item">
+                <a class="nav-link">
+                    <span><td><%= link_to '👥 Members', members_path, class: "nav-link collapsed" %></td></span>
+                </a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -61,22 +74,10 @@
             <!-- Nav Item - Alumni -->
             <li class="nav-item">
                 <a class="nav-link" >
-                    <span><td><%= link_to 'Alumni', alumnus_path, class: "nav-link collapsed" %></td></span></a>
+                    <span><td><%= link_to '👥 Alumni', alumnus_path, class: "nav-link collapsed" %></td></span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Nav Item - Admin Portal -->
-            <% if current_user %>
-                <% if is_admin(current_user.email) %>  <!-- only show admin link if current user is admin -->
-                    <li class="nav-item">
-                        <a class="nav-link" >
-                            <span><td><%= link_to 'Admin', admin_index_path, class: "nav-link collapsed" %></td></span></a>
-                    </li>
-                    <!-- Divider -->
-                    <hr class="sidebar-divider d-none d-md-block">
-                <% end %>
-            <% end %>
         </ul>
         <!-- End of Sidebar -->
 
@@ -129,52 +130,59 @@
                         <h1 class="h1 mb-0 text-gray-800">Calendar</h1>
                     </div>
 
+                    <div class="container mt-5 text-center">
+                    <p> Upcoming Events <p>
+                    <% if current_user %>
+                        <% if is_admin(current_user.email) %>
+                            <%= link_to 'New Event', new_event_path %>
+                        <% end %>
+                    <% end %>
+                    <%= month_calendar(attribute: :datetime, events: @events) do |date, events| %>
+                        <div class="day">
+                            <%= date.day %>
+                        </div>
+                        <% events.each do |event| %>
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <%= link_to event.title, event %>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    </div>
+
+                    <div class="container mt-5 text-center">
+                    <p> Upcoming Meetings <p>
+                    <% if current_user %>
+                        <% if is_admin(current_user.email) %>
+                            <%= link_to 'New Meeting', new_meeting_path %>
+                        <% end %>
+                    <% end %>
+                    <%= month_calendar(attribute: :datetime, events: @meetings) do |date, meetings| %>
+                        <div class="day">
+                            <%= date.day %>
+                        </div>
+                        <% meetings.each do |meeting| %>
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <%= link_to meeting.datetime, meeting %>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    </div>
+
                 </div>
                 <!-- End of Page Content -->
-
             
             </div>
-            
-           <div class="container mt-5 text-center">
-           <p> Upcoming Events <p>
-           <%= link_to 'New Event', new_event_path %>
-                <%= month_calendar(attribute: :datetime, events: @events) do |date, events| %>
-                    <div class="day">
-                        <%= date.day %>
-                    </div>
-                    <% events.each do |event| %>
-                        <div class="card-header">
-                            <div class="card-title">
-                                <%= link_to event.title, event %>
-                            </div>
-                        </div>
-                    <% end %>
-                <% end %>
-           </div>
-
-           <div class="container mt-5 text-center">
-           <p> Upcoming Meetings <p>
-           <%= link_to 'New Meeting', new_meeting_path %>
-                <%= month_calendar(attribute: :datetime, events: @meetings) do |date, meetings| %>
-                    <div class="day">
-                        <%= date.day %>
-                    </div>
-                    <% meetings.each do |meeting| %>
-                        <div class="card-header">
-                            <div class="card-title">
-                                <%= link_to meeting.datetime, meeting %>
-                            </div>
-                        </div>
-                    <% end %>
-                <% end %>
-           </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Brothers Under Christ | <%= link_to "Support", support_index_path %></span>
+                        <span>Brothers Under Christ | <%= link_to "Support", support_index_path %> | <%= get_app_version() %></span>
                     </div>
                 </div>
             </footer>
