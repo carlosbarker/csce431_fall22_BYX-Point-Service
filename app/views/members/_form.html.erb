@@ -1,0 +1,48 @@
+<%= form_with(model: member) do |form| %>
+    <% if member.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+  
+        <ul>
+          <% member.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :full_name %>
+      <%= form.text_field :full_name %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :card_id %>
+      <%= form.text_field :card_id %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :phone %>
+      <%= form.number_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= form.label :graduated %>
+      <%= form.text_field :graduated %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :admin %>
+      <%= form.text_field :admin %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+  
