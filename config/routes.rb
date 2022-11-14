@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  # get 'members', action: :index, controller: :members
-
   # resources define available paths. if listed here, then domain.com/resource_name WILL work, otherwise it will throw a routing error
   resources :admin
   resources :members
