@@ -200,6 +200,14 @@ ServicePoint.create({
 
 ServicePoint.create({
 })
+@meeting1 = Meeting.create({
+
+})
+Attendance.create({
+    tardy: false,
+    members_id: @trevoru.id,
+    meetings_id: @meeting1.id
+})
 
 # create an array of rows for the existing csv data files
 fall2021_data = CSV.read(Rails.root.join('lib', 'seeds', 'fall2021.csv'))

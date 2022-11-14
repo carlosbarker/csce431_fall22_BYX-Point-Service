@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :members
   resources :users
   resources :events
+  resources :alumnus
   # resources :admin_dash  # may not need to add this as a resource since it's hidden
 
   root 'landing#index'
