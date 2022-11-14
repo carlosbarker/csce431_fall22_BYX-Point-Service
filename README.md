@@ -62,6 +62,10 @@ Run the app
 
 The application can be seen using a browser and navigating to http://localhost:3000/
 
+If you are having issues logging in, it most likely is because your database is empty. In this case, run:
+
+`rails db:seed`
+
 # Google OAuth2 Environment Variables
 
 Google OAuth2 uses two environment variables to work:
