@@ -3,4 +3,5 @@
 <%= render 'form', meeting: @meeting %>
 
 <%= link_to 'Show', @meeting %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', events_path %> |
+<%= link_to 'Destroy', @meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
