@@ -173,6 +173,34 @@
         </ul>
         <!-- End of Sidebar -->
 
+<h1>Members</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Show</th>
+            <th>Edit</th>
+            <th>Destroy</th>
+            <th colspan="6"></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @members.each do |member| %>
+        <% if not member.graduated %>
+        <tr>
+        <td><%= member.full_name %></td>
+        <td><%= member.email %></td>
+        <td><%= link_to 'Show', member %></td>
+        <td><%= link_to 'Edit', edit_member_path(member) %></td>
+        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>
+
+<%= link_to 'New Member', new_member_path %>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
