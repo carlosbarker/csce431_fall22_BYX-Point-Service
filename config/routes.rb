@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   resources :support
   resources :meetings
 
+  # for rspec oauth redirect - ** DO NOT DELETE **
+  get '/o/oauth2/auth', to: redirect('/users/auth/google_oauth2')
+
   root 'landing#index'
 end
