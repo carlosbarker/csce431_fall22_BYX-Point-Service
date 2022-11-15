@@ -179,6 +179,9 @@
                     <!-- Page Subheading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h2 mb-0 text-gray-800">📢 Announcements 📢</h1>
+                    </div>
+                        
+                        <div class="row">
                         <table>
                         <thead>
                             <tr>
@@ -209,10 +212,11 @@
                         <% end %>
                         </tbody>
                     </table>
+                    </div>
                     <% if is_admin(current_user.email) %>
                     <%= link_to 'New Announcement', new_message_path %>
                     <% end %>
-                    </div>
+                    
 
                     <!-- Content Row -->
                     <div class="row">
