@@ -1,2 +1,0 @@
-class ServicePointsController < ApplicationController
-end

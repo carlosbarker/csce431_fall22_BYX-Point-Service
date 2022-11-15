@@ -3,4 +3,8 @@ class UsersController < ApplicationController
 
   def index
   end
+  
+  # for rspec oauth mock session destroy - ** DO NOT DELETE **
+  def show
+  end
 end
