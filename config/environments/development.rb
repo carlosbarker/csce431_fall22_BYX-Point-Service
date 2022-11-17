@@ -75,6 +75,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 end
 
+# Special thanks to team who helped out with this mock section
 # Use mock account in dev environment if Google OAuth environment variables are not specified
 if !(ENV.has_key?("GOOGLE_OAUTH_CLIENT_ID") || ENV.has_key?("GOOGLE_OAUTH_CLIENT_SECRET"))
   # Test mode will auto redirect to auth/google/callback, no call is made to actual Google authentication server
