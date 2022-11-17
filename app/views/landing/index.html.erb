@@ -176,11 +176,19 @@
                     </div>
                     <!-- End of Content Row -->
 
+                     <!-- Admin attendance submission Subheading -->
+                     <% if is_admin(current_user.email) %>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h2 mb-0 text-gray-800">Attendance form submission</h1>
+                    </div>
+                    
+                    <%= select_tag "meetings", options_from_collection_for_select(Meeting.all, 'id', 'datetime')%>
+                    <% end %>
+
                     <!-- Page Subheading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h2 mb-0 text-gray-800">📢 Announcements 📢</h1>
                     </div>
-                        
                         <div class="row">
                         <table>
                         <thead>
