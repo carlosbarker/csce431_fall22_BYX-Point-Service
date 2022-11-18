@@ -10,6 +10,9 @@ class EventsController < ApplicationController
             #datetime: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
         #)
         @meetings = Meeting.all
+
+        @service_points = ServicePoint.all
+        @attendances = Attendance.all
     end
 
     def show

@@ -1,0 +1,27 @@
+<%= form_with(model: service_point) do |form| %>
+    <% if service_point.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(service_point.errors.count, "error") %> prohibited this attendance record from being saved:</h2>
+        <ul>
+          <% service_point.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :members_id %>
+      <%= form.select :members_id, Member.order(:full_name).map { |member| [member.full_name, member.id] }, include_blank: true, id: "id_of_the_member_id_select_box" %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :event_id %>
+      <%= form.select :event_id, Event.order(:datetime).map { |event| [meeting.title, event.id] }, include_blank: true, id: "id_of_the_event_id_select_box" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+  
