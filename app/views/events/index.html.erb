@@ -172,6 +172,84 @@
                     <% end %>
                     </div>
 
+
+                    <!-- Service Point Table NOTE, commented out code should run correctly once bootstrap js is installed-->
+                    <% if is_admin(current_user.email) %>
+                        <%# <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            All Service Points
+                        </button>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body"> %>
+                            <%= link_to 'Submit Service Point Form', '/service_points/upload'%>
+
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Event ID</th>
+                                                    <th>Member ID</th>                                    
+                                                    <th>Show</th>
+                                                    <th>Edit</th>
+                                                    <th>Destroy</th>
+                                                    <th colspan="5"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% @service_points.each do |service_point| %>
+                                                    <tr>
+                                                    <td><%= service_point.events_id %></td>
+                                                    <td><%= service_point.members_id %></td>
+                                                    <td><%= link_to 'Show', service_point %></td>
+                                                    <td><%= link_to 'Edit', edit_service_point_path(service_point) %></td>
+                                                    <td><%= link_to 'Destroy', service_point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                                    </tr>
+                                            <% end %>
+                                            </tbody>
+                                        </table>
+
+                                        <% if current_user %>
+                                            <% if is_admin(current_user.email) %>
+                                                <%= link_to 'New Service Point', 'service_points/new' %>
+                                            <% end %>
+                                        <% end %>
+                            <%# </div>
+                        </div> %>
+                    <% end %>
+                        
+
+                    <!-- Attendances Table -->
+                    <% if is_admin(current_user.email) %>
+                        <p> Attendances <p>
+                        <%= link_to 'Submit Attendance Form', '/attendances/upload'%>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Meeting ID</th>
+                                    <th>Member ID</th>                                    
+                                    <th>Show</th>
+                                    <th>Edit</th>
+                                    <th>Destroy</th>
+                                    <th colspan="5"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% @attendances.each do |attendance| %>
+                                    <tr>
+                                    <td><%= attendance.meetings_id %></td>
+                                    <td><%= attendance.members_id %></td>
+                                    <td><%= link_to 'Show', attendance %></td>
+                                    <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
+                                    <td><%= link_to 'Destroy', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                    </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                        <% if current_user %>
+                            <% if is_admin(current_user.email) %>
+                                <%= link_to 'New Attendance Instance', 'attendances/new' %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+
                 </div>
                 <!-- End of Page Content -->
             

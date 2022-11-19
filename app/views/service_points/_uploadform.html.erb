@@ -1,0 +1,15 @@
+<%= form_with(:url => {:action => "upload_action"}) do |form| %>
+  
+    <div class="field">
+      <%= form.label :events_id %>
+      <%= form.select :events_id, Event.order('datetime DESC').map { |event| [event.title, event.id] }, include_blank: true, id: "id_of_the_event_id_select_box" %>
+    </div>
+
+    <%= form.file_field :file %>
+
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+  <% end %>
+
+  
