@@ -16,8 +16,8 @@
     </div>
   
     <div class="field">
-      <%= form.label :event_id %>
-      <%= form.select :event_id, Event.order(:datetime).map { |event| [meeting.title, event.id] }, include_blank: true, id: "id_of_the_event_id_select_box" %>
+      <%= form.label :events_id %>
+      <%= form.select :events_id, Event.order(:datetime).map { |event| [event.title, event.id] }, include_blank: true, id: "id_of_the_event_id_select_box" %>
     </div>
 
     <div class="actions">

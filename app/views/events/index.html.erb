@@ -173,13 +173,15 @@
                     </div>
 
 
-                    <!-- Service Point Table -->
+                    <!-- Service Point Table NOTE, commented out code should run correctly once bootstrap js is installed-->
                     <% if is_admin(current_user.email) %>
                         <%# <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             All Service Points
                         </button>
                         <div class="collapse" id="collapseExample">
                             <div class="card card-body"> %>
+                            <%= link_to 'Submit Service Point Form', '/service_points/upload'%>
+
                                         <table>
                                             <thead>
                                                 <tr>
@@ -203,6 +205,12 @@
                                             <% end %>
                                             </tbody>
                                         </table>
+
+                                        <% if current_user %>
+                                            <% if is_admin(current_user.email) %>
+                                                <%= link_to 'New Service Point', 'service_points/new' %>
+                                            <% end %>
+                                        <% end %>
                             <%# </div>
                         </div> %>
                     <% end %>
@@ -211,6 +219,7 @@
                     <!-- Attendances Table -->
                     <% if is_admin(current_user.email) %>
                         <p> Attendances <p>
+                        <%= link_to 'Submit Attendance Form', '/attendances/upload'%>
                         <table>
                             <thead>
                                 <tr>
@@ -234,6 +243,11 @@
                             <% end %>
                             </tbody>
                         </table>
+                        <% if current_user %>
+                            <% if is_admin(current_user.email) %>
+                                <%= link_to 'New Attendance Instance', 'attendances/new' %>
+                            <% end %>
+                        <% end %>
                     <% end %>
 
                 </div>

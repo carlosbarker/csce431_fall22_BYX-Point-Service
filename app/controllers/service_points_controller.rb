@@ -2,7 +2,7 @@ require 'csv'
 
 class ServicePointsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_attendance, only: %i[ show edit update destroy ]
+    before_action :set_service_point, only: %i[ show edit update destroy ]
     
     def index
         @service_points = ServicePoint.all
@@ -23,7 +23,7 @@ class ServicePointsController < ApplicationController
 
         respond_to do |format|
             if @service_point.save
-                format.html { redirect_to root_path, notice: "Service Point was successfully created" }
+                format.html { redirect_to '/events', notice: "Service Point was successfully created" }
             else
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: @service_point.errors, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class ServicePointsController < ApplicationController
 
         respond_to do |format|
             if @service_point.update(service_point_params)
-                format.html { redirect_to root_path, notice: "Service Point was successfully updated" }
+                format.html { redirect_to '/events', notice: "Service Point was successfully updated" }
             else
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: @service_point.errors, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class ServicePointsController < ApplicationController
         @service_point.destroy
         
         flash[:notice]="Service Point for '#{@member.full_name}' at Event '#{@event.title}' deleted successfully."
-        redirect_to(root_path)
+        redirect_to('/events')
     end
 
     def upload
@@ -76,7 +76,7 @@ class ServicePointsController < ApplicationController
                 members_id: member.id
             )
         end
-        redirect_to(root_path)
+        redirect_to('/events')
     end
 
     private
@@ -88,7 +88,7 @@ class ServicePointsController < ApplicationController
         end
 
         def service_point_params
-            params.require(:attendance).permit(:events_id, :members_id, :file)
+            params.require(:service_point).permit(:events_id, :members_id, :file)
         end
 
 end

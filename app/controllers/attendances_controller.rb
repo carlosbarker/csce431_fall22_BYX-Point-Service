@@ -23,7 +23,7 @@ class AttendancesController < ApplicationController
 
         respond_to do |format|
             if @attendance.save
-                format.html { redirect_to root_path, notice: "Attendance record was successfully created" }
+                format.html { redirect_to '/events', notice: "Attendance record was successfully created" }
             else
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: @attendance.errors, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class AttendancesController < ApplicationController
 
         respond_to do |format|
             if @attendance.update(attendance_params)
-                format.html { redirect_to root_path, notice: "Attendance record was successfully updated" }
+                format.html { redirect_to '/events', notice: "Attendance record was successfully updated" }
             else
                 format.html { render :new, status: :unprocessable_entity }
                 format.json { render json: @attendance.errors, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class AttendancesController < ApplicationController
         @attendance.destroy
         
         flash[:notice]="Attendance record for '#{@member.full_name}' at meeting '#{@meeting.datetime}' deleted successfully."
-        redirect_to(root_path)
+        redirect_to('/events')
     end
 
     def upload
