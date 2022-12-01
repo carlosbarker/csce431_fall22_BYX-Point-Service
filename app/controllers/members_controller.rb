@@ -47,6 +47,8 @@ class MembersController < ApplicationController
 
     def destroy
         @member = Member.find(params[:id])
+        @user = User.where(:email => @member.email).first
+        @user.destroy
         @member.destroy
         flash[:notice]="Member '#{@member.full_name}' deleted successfully."
         redirect_to(members_path)
